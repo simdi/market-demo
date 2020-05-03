@@ -30,7 +30,7 @@ export class MarketService {
 
   async create(market: any) {
     market.id = uuid();
-    // const googleAPI = await  this.httpService.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${market.address}&key=AIzaSyBzJPfwMNG0ufSdETlyzxdl8CLb_KPsxFE`).toPromise();
+    // const googleAPI = await  this.httpService.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${market.address}&key={googleMapAPIKey}`).toPromise();
     const googleAPI = await this.httpService.get('https://api.github.com/users/simdi').toPromise();
     const data = await this.extractAddressFromGoogleResponse(googleAPI.data);
     console.log('Google', data);
