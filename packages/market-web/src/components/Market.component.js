@@ -1,12 +1,13 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import { Card, Icon } from 'semantic-ui-react'
+import { NavLink } from 'react-router-dom';
+import { Card, Icon } from 'semantic-ui-react';
 
 const extra = (
-  <a>
+  <NavLink>
     <Icon name='user' />
     16 Friends
-  </a>
+  </NavLink>
 )
 
 const Market = (props) => (

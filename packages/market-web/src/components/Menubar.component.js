@@ -11,9 +11,9 @@ const MenubarComponent = () => {
           Markets
       </NavLink>
       <div className="right menu">
-        <a className="ui item">
+        <NavLink className="ui item">
           Logout
-        </a>
+        </NavLink>
       </div>
     </div>
   );

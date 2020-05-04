@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 // import PropTypes from 'prop-types';
 import axios from 'axios';
-import Markets from '../components/Markets';
-import Map from '../components/Map';
-import Search from '../components/Search';
+import Markets from '../components/Markets.component';
+import Map from '../components/Map.component';
+import Search from '../components/Search.component';
 import { GlobalContext } from '../context';
 
 const MarketPage = props => {

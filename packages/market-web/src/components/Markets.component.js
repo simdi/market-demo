@@ -1,6 +1,6 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import Market from './Market';
+import Market from './Market.component';
 
 function Markets(props) {
   return (
