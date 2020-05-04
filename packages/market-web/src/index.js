@@ -1,18 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+// import { Provider } from 'react-redux';
 // import { createStore } from 'redux';
 import './index.css';
 import App from './App';
-import configureStore from './redux/configureStore';
+// import configureStore from './redux/configureStore';
+import { GlobalContextProvider } from './context';
 // import * as serviceWorker from './serviceWorker';
 
-const store = configureStore();
+// const store = configureStore();
 
 ReactDOM.render(
-  <Provider store={store}>
-      <App />
-  </Provider>,
+  <GlobalContextProvider>
+    <BrowserRouter>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </BrowserRouter>
+  </GlobalContextProvider>,
   document.getElementById('root')
 );
 

@@ -1,17 +1,18 @@
 import React from 'react';
+import { NavLink, Route } from 'react-router-dom';
+import { Container } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 import './App.css';
-import MarketContainer from './container/MarketContainer';
+// import MarketContainer from './container/MarketContainer';
+import MarketPage from './pages/Market.page';
+import MenubarPage from './pages/Menubar.page';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        Header
-      </header>
-      <div>
-        <MarketContainer />
-      </div>
-    </div>
+    <Container>
+      <MenubarPage />
+      <Route exact path="/" component={MarketPage} />
+    </Container>
   );
 }
 

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import Market from '../pages/Market';
+import Market from '../pages/Market.page';
 
 export const mapDispatchToProps = {
 };
