@@ -8,7 +8,8 @@ import './App.css';
 import MarketPage from './pages/Market.page';
 import MenubarPage from './pages/Menubar.page';
 import LoginComponent from './components/Login.component';
-import PostMarketComponent from './components/PostMarket.component';
+// import PostMarketComponent from './components/PostMarket.component';
+import PostMarketNew from './components/PostMarketNew';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
       <MenubarPage />
       <Route exact path="/" component={MarketPage} />
       <Route exact path="/auth/login" component={LoginComponent} />
-      <Route exact path="/admin/markets" component={PostMarketComponent} />
+      <Route exact path="/admin/markets" component={PostMarketNew} />
     </Container>
   );
 }

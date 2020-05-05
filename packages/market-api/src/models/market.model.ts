@@ -6,7 +6,7 @@ export class Market {
   @IsString()
   name: string;
   @IsArray()
-  imageURLs: [string];
+  imageURLs: string[];
   @IsString()
   description: string;
   @IsString()

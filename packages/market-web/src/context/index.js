@@ -1,6 +1,6 @@
 import React, { useReducer, createContext } from 'react';
 import rootReducer from '../redux/reducers';
-import { getMarkets } from '../redux/actions/marketActions';
+import { getMarkets, addMarket } from '../redux/actions/marketActions';
 import { marketState } from '../redux/reducers/marketReducer';
 
 const initialState = {
@@ -20,7 +20,8 @@ export const GlobalContextProvider = props => {
     <GlobalContext.Provider value={{
       state,
       dispatch,
-      getMarkets
+      getMarkets,
+      addMarket
     }}>
       {children}
     </GlobalContext.Provider>

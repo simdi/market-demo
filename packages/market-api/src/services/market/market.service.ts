@@ -26,20 +26,41 @@ export class MarketService {
             "country": "Nigeria"
         },
         "id": "10f15fca-86e0-4cb9-92d4-9c6e984528a2"
-    }
+      },
+      {
+        "name": "Oynibo Market",
+        "description": "Oynibo market sells cloths",
+        "imageURLs": ['https://assd.com/image','https://asdas.com/aimaga'],
+        "category": "Okrika Clothes",
+        "address": {
+            "fullAddress": "13 Allen Ave, Allen, Ikeja, Nigeria",
+            "location": {
+                "lat": 6.5972297,
+                "lng": 3.3541596
+            },
+            "streetNumber": "13",
+            "city": "Allen",
+            "country": "Nigeria"
+        },
+        "id": "a55c069a-00e5-42e1-9ad5-0bf0b5018e0b"
+      }
     ];
   }
 
   async create(market: any) {
     market.id = uuid();
-    // const googleAPI = await  this.httpService.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${market.address}&key=${this.googleMapsApiKey}`).toPromise();
-    const googleAPI = await this.httpService.get('https://api.github.com/users/simdi').toPromise();
-    const data = await this.extractAddressFromGoogleResponse(googleAPI.data);
-    console.log('Google', data);
-    if (data) {
-      market.address = data;
+    try {
+      // const googleAPI = await  this.httpService.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${market.address}&key=${this.googleMapsApiKey}`).toPromise();
+      const googleAPI = await this.httpService.get('https://api.github.com/users/simdi').toPromise();
+      const data = await this.extractAddressFromGoogleResponse(googleAPI.data);
+      console.log('Google', data);
+      if (data) {
+        market.address = data;
+      }
+      this.markets.push(market);
+    } catch(e) {
+      console.log('Error', e);
     }
-    this.markets.push(market);
   }
 
   async extractAddressFromGoogleResponse(data: any) {

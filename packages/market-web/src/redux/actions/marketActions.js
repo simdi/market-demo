@@ -7,8 +7,8 @@ export const addMarket = postData => dispatch => {
   axios.post('/api/v1/markets', postData).then(res => {
       dispatch({
         type: ADD_MARKET,
-        payload: (res.data.data.length > 0) ? res.data.data[0] : []
-      })
+        payload: (res.data.length > 0) ? res.data : []
+      });
   }).catch(err => {
       dispatch({
         type: GET_ERRORS,
