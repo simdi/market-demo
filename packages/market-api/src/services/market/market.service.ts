@@ -64,6 +64,7 @@ export class MarketService {
   }
 
   async extractAddressFromGoogleResponse(data: any) {
+    console.log('Google response', data);
     if(data.results && data.results.length > 0 && data.status && data.status === 'OK') {
       const address: any = {
         fullAddress: data.results[0].formatted_address,
@@ -86,6 +87,17 @@ export class MarketService {
       return address;
     }
     return undefined;
+  }
+
+  async searchByNameCategoryAndLocation(search: string, lng: number, lat: number) {
+    console.log('Service', search, lng, lat);
+    return this.markets.filter(market => {
+      const nameSearch = market.name.toLowerCase().includes(search);
+      const categorySearch = market.category.toLowerCase().includes(search);
+      if (nameSearch || categorySearch) {
+        return market;
+      }
+    });
   }
 
   async findAll(): Promise<Market[]> {
