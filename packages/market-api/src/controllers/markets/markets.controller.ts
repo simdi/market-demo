@@ -10,7 +10,6 @@ export class MarketsController {
   @Post()
   @HttpCode(204)
   create(@Body() market: MarketDTO) {
-    console.log(market);
     this.marketService.create(market);
   }
 

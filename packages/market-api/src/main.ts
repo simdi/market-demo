@@ -1,7 +1,7 @@
 require('dotenv').config();
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common/pipes/validation.pipe';
+import { ValidationPipe } from '@nestjs/common';
 
 const PORT = process.env.PORT || 8001;
 
@@ -10,7 +10,7 @@ async function bootstrap() {
   app.enableCors();
   app.setGlobalPrefix("/api/v1");
   app.useGlobalPipes(new ValidationPipe({
-    // skipMissingProperties: true,
+    skipMissingProperties: true,
     forbidNonWhitelisted: true,
     whitelist: true,
     transform: true

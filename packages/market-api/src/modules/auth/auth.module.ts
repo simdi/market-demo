@@ -1,21 +1,23 @@
 import { Module } from '@nestjs/common';
-import { UsersService } from '../../services/users/users.service';
+import { PassportModule } from '@nestjs/passport';
 import { AuthService } from '../../services/auth/auth.service';
+import { AuthController } from '../../controllers/auth/auth.controller';
+import { UsersModule } from '../../modules/users/users.module';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from 'src/utils/constants';
+import { JwtStrategy } from 'src/services/auth/jwt.strategy';
 
 @Module({
-  imports: [],
-  controllers: [],
-  providers: [UsersService, AuthService],
+  imports: [
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    UsersModule,
+    JwtModule.register({
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '1d' },
+    })
+  ,],
+  controllers: [AuthController],
+  providers: [AuthService, JwtStrategy],
+  exports: [PassportModule, JwtStrategy]
 })
-export class AuthModule {
-  constructor(private usersService: UsersService) {}
-
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.usersService.findOne(username);
-    if (user && user.password === pass) {
-      const { password, ...result } = user;
-      return result;
-    }
-    return null;
-  }
-}
+export class AuthModule {}

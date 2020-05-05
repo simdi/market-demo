@@ -1,11 +1,12 @@
 import { Injectable, HttpService } from '@nestjs/common';
 import { Market } from 'src/models/market.model';
 import { v4 as uuid } from 'uuid';
+import { jwtConstants } from 'src/utils/constants';
 
 @Injectable()
 export class MarketService {
   private readonly markets: Market[] = [];
-  private readonly googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
+  private readonly googleMapsApiKey = jwtConstants.googleAPIKey;
 
   constructor(private httpService: HttpService) {
     this.markets = [
