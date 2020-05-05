@@ -1,4 +1,4 @@
-import { ADD_MARKET, GET_MARKET } from '../actions/types';
+import { ADD_MARKET, FETCH_MARKETS } from '../actions/types';
 
 const initialState = {
   markets: [],
@@ -11,13 +11,13 @@ export function markets(state = initialState, action) {
     case ADD_MARKET:
       return {
         ...state,
-        market: action.payload.market,
+        market: action.payload,
         loading: false
       }
-    case GET_MARKET:
+    case FETCH_MARKETS:
       return {
         ...state,
-        markets: action.payload.markets,
+        markets: action.payload,
         loading: false
       }
     default:

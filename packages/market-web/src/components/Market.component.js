@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { Card, Icon } from 'semantic-ui-react';
 
 const extra = (
-  <NavLink>
+  <NavLink to="">
     <Icon name='user' />
     16 Friends
   </NavLink>

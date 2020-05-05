@@ -1,17 +1,26 @@
 import React, { useReducer, createContext } from 'react';
 import rootReducer from '../redux/reducers';
+import { getMarkets } from '../redux/actions/marketActions';
 
 const initialState = {
-  markets: []
+  markets: {}
 }
+
 export const GlobalContext = createContext(initialState);
 
 export const GlobalContextProvider = props => {
-  const [state, dispatch] = useReducer(rootReducer, initialState);
+  console.log('Props', props);
+  const context = useReducer(rootReducer, initialState);
+  const [state, dispatch] = context;
+  console.log('Global context', context);
   const { children } = props;
 
   return (
-    <GlobalContext.Provider value={[state, dispatch]}>
+    <GlobalContext.Provider value={{
+      state,
+      dispatch,
+      getMarkets
+    }}>
       {children}
     </GlobalContext.Provider>
   );

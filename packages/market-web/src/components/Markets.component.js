@@ -6,7 +6,11 @@ function Markets(props) {
   return (
     <div>
       list of markets.
-      <Market />
+      {
+        [1, 2, 3, 4 , 5,6].map(m => {
+          return <Market key={m} />
+        })
+      }
     </div>
   )
 }

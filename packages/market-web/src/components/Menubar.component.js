@@ -10,9 +10,15 @@ const MenubarComponent = () => {
       <NavLink className="item" to="/markets">
           Markets
       </NavLink>
+      <NavLink className="item" to="/admin/markets">
+          Post Markets
+      </NavLink>
       <div className="right menu">
-        <NavLink className="ui item">
+        <NavLink className="ui item" to="">
           Logout
+        </NavLink>
+        <NavLink className="ui item" to="/auth/login">
+          Login
         </NavLink>
       </div>
     </div>
