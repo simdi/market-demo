@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { markets } from './marketReducer';
+import { market } from './marketReducer';
 
 const rootReducer = combineReducers({
-  markets
+  market
 });
 
 export default rootReducer;

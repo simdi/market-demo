@@ -14,6 +14,7 @@ import { GlobalContext } from '../context';
 const MarketPage = props => {
   const context = useContext(GlobalContext);
   const {state,dispatch, getMarkets} = context;
+  console.log();
   // const dispatch = useDispatch();
   console.log('Context', context);
 

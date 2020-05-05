@@ -1,10 +1,11 @@
 import React, { useReducer, createContext } from 'react';
 import rootReducer from '../redux/reducers';
 import { getMarkets } from '../redux/actions/marketActions';
+import { marketState } from '../redux/reducers/marketReducer';
 
 const initialState = {
-  markets: {}
-}
+  market: {...marketState}
+};
 
 export const GlobalContext = createContext(initialState);
 

@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // import PropTypes from 'prop-types';
 import Market from './Market.component';
+import { GlobalContext } from '../context';
+import LoadingMarketComponent from './LoadingMarket.component';
 
 function Markets(props) {
+  const context = useContext(GlobalContext);
+  const { state: { market, loading }} = context;
+  const { markets } = market;
+  console.log('Markets', market);
   return (
     <div>
       list of markets.
       {
-        [1, 2, 3, 4 , 5,6].map(m => {
-          return <Market key={m} />
-        })
+        !loading
+          ? (markets.map(m => <Market key={m.id} market={m} />))
+          : (<div class="ui three column stackable grid">
+              {
+                Array(3).fill(3).map(m => <LoadingMarketComponent />)
+              }
+          </div>)
       }
+
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD_MARKET, FETCH_MARKETS, GET_ERRORS, CLEAR_ERRORS, POST_LOADING } from './types';
+import { ADD_MARKET, FETCH_MARKETS, GET_ERRORS, CLEAR_ERRORS, POST_LOADING, GET_LOADING } from './types';
 
 // Add Post
 export const addMarket = postData => dispatch => {
@@ -20,13 +20,15 @@ export const addMarket = postData => dispatch => {
 // Get Posts
 export const getMarkets = () => dispatch => {
   console.log('Actual API');
-  dispatch(setPostLoading());
+  dispatch(setGetLoading());
   axios.get('/api/v1/markets').then(res => {
     console.log('Res', res);
+    setTimeout(() => {
       dispatch({
           type: FETCH_MARKETS,
           payload: (res.data.length > 0) ? res.data : []
       });
+    },2000)
   }).catch(err => {
     console.log('Err', err);
       dispatch({
@@ -40,6 +42,12 @@ export const getMarkets = () => dispatch => {
 export const setPostLoading = () => {
   return {
     type: POST_LOADING
+  };
+};
+
+export const setGetLoading = () => {
+  return {
+    type: GET_LOADING
   };
 };
 
