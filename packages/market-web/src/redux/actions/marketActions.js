@@ -24,24 +24,21 @@ export const addMarket = postData => dispatch => {
 export const getMarkets = () => dispatch => {
   dispatch(setGetLoading(true));
   axios.get('/api/v1/markets').then(res => {
-    setTimeout(() => {
-      dispatch({
-          type: FETCH_MARKETS,
-          payload: (res.data.length > 0) ? res.data : []
-      });
-      dispatch(setGetLoading(false));
-    }, 5000);
+    dispatch({
+        type: FETCH_MARKETS,
+        payload: (res.data.length > 0) ? res.data : []
+    });
+    dispatch(setGetLoading(false));
   }).catch(err => {
-    console.log('Err', err);
     dispatch({
       type: FETCH_MARKETS,
-      payload: null
+      payload: []
     });
     dispatch(setGetLoading(false));
   });
 };
 
-export const searchMarketWithNameCategoryAndLocation = (search) => dispatch => {
+export const searchMarketWithNameCategoryAndLocation = ({ search }) => dispatch => {
   dispatch(setGetLoading(true));
   axios.get(`/api/v1/markets/filterBy?search=${search}`).then(res => {
     dispatch({
@@ -50,10 +47,9 @@ export const searchMarketWithNameCategoryAndLocation = (search) => dispatch => {
     });
     dispatch(setGetLoading(false));
   }).catch(err => {
-    console.log('Err', err);
     dispatch({
       type: SEARCH_MARKETS,
-      payload: null
+      payload: []
     });
     dispatch(setGetLoading(false));
   });

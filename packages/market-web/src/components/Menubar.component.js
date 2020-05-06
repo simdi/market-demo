@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // import jwtDecode from 'jwt-decode';
 // import helpers from '../helpers/helpers';
 import { NavLink } from 'react-router-dom';
 // import { setCurrentUser, logoutUser } from '../redux/actions/authAction';
-// import { GlobalContext } from '../context';
+import { GlobalContext } from '../context';
 
 const MenubarComponent = () => {
-  // const context = useContext(GlobalContext);
-  // const { state, dispatch } = context;
-  // console.log('res', context);
+  const context = useContext(GlobalContext);
+  const { state } = context;
+  console.log('res', state);
+  const { isAuthenticated } = state;
   // let history = useHistory();
   // // let dispatch = useDispatch();
   // // useEffect(() => {
@@ -37,23 +38,26 @@ const MenubarComponent = () => {
   // }
 
   return (
-    <div className="ui secondary  menu">
+    <div className="ui fluid menu">
       <NavLink className="item" activeClassName="active" exact to="/">
           Home
       </NavLink>
-      <NavLink className="item" to="/markets">
-          Markets
-      </NavLink>
-      <NavLink className="item" to="/admin/markets">
-          Post Markets
-      </NavLink>
+    {
+      isAuthenticated ? (
+        <NavLink className="item" to="/admin/markets">
+            Post Markets
+        </NavLink>
+      ) : null
+    }
       <div className="right menu">
-        <NavLink className="ui item" to="">
+      {
+        isAuthenticated ? (<NavLink className="ui item" to="">
           Logout
-        </NavLink>
-        <NavLink className="ui item" to="/auth/login">
+        </NavLink>) :
+        (<NavLink className="ui item" to="/auth/login">
           Login
-        </NavLink>
+        </NavLink>)
+      }
       </div>
     </div>
   );

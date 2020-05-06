@@ -18,15 +18,9 @@ const MarketPage = props => {
 
   return (
     <React.Fragment>
-      <Grid className="page-container">
-        <Grid.Row>
-          <Grid.Column>
-            <Search />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-      <Grid columns={2} divided padded>
+      <Grid columns={2} padded>
         <Grid.Column width={8}>
+          <Search />
           <Markets />
         </Grid.Column>
         <Grid.Column width={8} style={{ height: '800px' }}>

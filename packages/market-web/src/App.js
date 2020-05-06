@@ -16,7 +16,7 @@ import PostMarketNew from './components/PostMarketNew';
 
 function App() {
   return (
-    <Container>
+    <Container className="fluid">
       <MenubarPage />
       <Route exact path="/" component={MarketPage} />
       <Route exact path="/auth/login" component={LoginComponent} />

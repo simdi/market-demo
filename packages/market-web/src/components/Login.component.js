@@ -14,7 +14,7 @@ const LoginComponent = () => {
   }
 
   return (
-    <Grid centered columns={2}>
+    <Grid centered columns={2} style={{ marginTop: '3em'}}>
       <Grid.Column className="ui fluid card">
         <h1 style={{ marginTop: '1em' }}>Add New Address</h1>
         {

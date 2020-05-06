@@ -13,7 +13,7 @@ export class MarketService {
       {
         "name": "Sunday Market",
         "description": "Sunday market sells groceries",
-        "imageURLs": ['https://placehold.it'],
+        "imageURLs": ['https://picsum.photos/200/300', 'https://picsum.photos/200/300'],
         "category": "meat",
         "address": {
             "street": "Leye Pratt St, Olowora",
@@ -32,7 +32,7 @@ export class MarketService {
       {
         "name": "Oynibo Market",
         "description": "Oynibo market sells cloths",
-        "imageURLs": ['https://assd.com/image','https://asdas.com/aimaga'],
+        "imageURLs": ['https://picsum.photos/200/300','https://picsum.photos/200/300'],
         "category": "Okrika Clothes",
         "address": {
             "street": "Allen Ave, Allen",

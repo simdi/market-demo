@@ -10,15 +10,18 @@ const Markets = () => {
 
   return (
     <div>
-      List of markets.
       {
-        !loading
-        ? (markets.map(m => <Market key={m.id} market={m} />))
-        : (
+        loading ? (
           <div className="ui three column stackable grid">
             {  Array(3).fill(3).map((m, i) => <LoadingMarketComponent key={i} />) }
           </div>
-        )
+        ) : ((markets.length > 0) ? (
+          <div className="ui grid container">
+            <div className="two column row">
+              {markets.map(m => <Market key={m.id} market={m} />)}
+            </div>
+          </div>
+          ) : (<h3>There are no markets to display!</h3>))
       }
     </div>
   )

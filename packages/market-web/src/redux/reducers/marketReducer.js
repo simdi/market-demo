@@ -1,8 +1,7 @@
-import { ADD_MARKET, FETCH_MARKETS, GET_LOADING, POST_LOADING } from '../actions/types';
+import { ADD_MARKET, FETCH_MARKETS, GET_LOADING, POST_LOADING, SEARCH_MARKETS } from '../actions/types';
 
 export const marketState = {
   markets: [],
-  searchMarkets: [],
   market: {},
   loading: false,
   postLoading: false
@@ -17,6 +16,12 @@ export const market = (state = marketState, action) => {
         loading: false
       }
     case FETCH_MARKETS:
+      return {
+        ...state,
+        markets: action.payload,
+        loading: false
+      }
+    case SEARCH_MARKETS:
       return {
         ...state,
         markets: action.payload,
