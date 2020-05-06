@@ -1,13 +1,14 @@
-import { ADD_MARKET, FETCH_MARKETS, GET_LOADING } from '../actions/types';
+import { ADD_MARKET, FETCH_MARKETS, GET_LOADING, POST_LOADING } from '../actions/types';
 
 export const marketState = {
   markets: [],
+  searchMarkets: [],
   market: {},
-  loading: false
+  loading: false,
+  postLoading: false
 };
 
 export const market = (state = marketState, action) => {
-  console.log(action.payload);
   switch (action.type) {
     case ADD_MARKET:
       return {
@@ -24,7 +25,12 @@ export const market = (state = marketState, action) => {
     case GET_LOADING:
       return {
         ...state,
-        loading: true
+        loading: action.payload
+      }
+    case POST_LOADING:
+      return {
+        ...state,
+        postLoading: action.payload
       }
     default:
       return state

@@ -1,19 +1,23 @@
 import React, { useReducer, createContext } from 'react';
 import rootReducer from '../redux/reducers';
-import { getMarkets, addMarket } from '../redux/actions/marketActions';
+import { getMarkets, addMarket, searchMarketWithNameCategoryAndLocation } from '../redux/actions/marketActions';
+import { loginUser, logoutUser } from '../redux/actions/authAction';
 import { marketState } from '../redux/reducers/marketReducer';
+import { errorState } from '../redux/reducers/errorReducer';
+import { authState } from '../redux/reducers/authReducer';
 
 const initialState = {
-  market: {...marketState}
+  market: { ...marketState },
+  auth: { ...authState },
+  errors: { ...errorState }
 };
 
 export const GlobalContext = createContext(initialState);
 
 export const GlobalContextProvider = props => {
-  console.log('Props', props);
   const context = useReducer(rootReducer, initialState);
   const [state, dispatch] = context;
-  console.log('Global context', context);
+  console.log('State', state);
   const { children } = props;
 
   return (
@@ -21,7 +25,10 @@ export const GlobalContextProvider = props => {
       state,
       dispatch,
       getMarkets,
-      addMarket
+      addMarket,
+      searchMarketWithNameCategoryAndLocation,
+      loginUser,
+      logoutUser
     }}>
       {children}
     </GlobalContext.Provider>

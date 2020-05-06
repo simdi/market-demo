@@ -1,7 +1,10 @@
 export const ADD_MARKET = 'ADD_MARKET';
 export const FETCH_MARKETS = 'FETCH_MARKETS';
-export const SEARCH_MARKET = 'SEARCH_MARKET';
+export const SEARCH_MARKETS = 'SEARCH_MARKETS';
 export const GET_ERRORS = 'GET_ERRORS';
 export const POST_LOADING = 'POST_LOADING';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const GET_LOADING = 'GET_LOADING';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const GET_PROFILE = 'GET_PROFILE';
+export const CLEAR_CURRENT_PROFILE = 'CLEAR_CURRENT_PROFILE';
