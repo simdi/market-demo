@@ -1,7 +1,6 @@
 import { Controller, Post, HttpCode, Body, Get, Query } from '@nestjs/common';
 import { MarketService } from 'src/services/market/market.service';
 import { Market } from 'src/models/market.model';
-import { MarketDTO } from 'src/dtos/marketDTO.dto';
 
 @Controller('markets')
 export class MarketsController {
@@ -9,7 +8,7 @@ export class MarketsController {
 
   @Post()
   @HttpCode(204)
-  create(@Body() market: MarketDTO) {
+  create(@Body() market: Market) {
     this.marketService.create(market);
   }
 

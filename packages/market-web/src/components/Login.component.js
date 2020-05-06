@@ -57,7 +57,7 @@ const LoginComponent = () => {
               <input
                 id="password"
                 name="password"
-                type="text"
+                type="password"
                 placeholder="Password"
                 ref={register({ required: true, minLength: 2 })}
               />

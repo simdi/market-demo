@@ -13,14 +13,31 @@ const PostMarketNew = () => {
   console.log('Error', errors);
   const onSubmit = data => {
     console.log(data);
-    const newData = { ...data, imageURLs: data.imageURLs.split(',') };
+    const address = {
+      streetNumber: data.streetNumber,
+      street: data.street,
+      city: data.city,
+      state: data.state,
+      country: data.country,
+      fullName: `${data.streetNumber} ${data.street}, ${data.city}, ${data.state}, ${data.country}`,
+    };
+    const newData = { 
+      ...data,
+      imageURLs: data.imageURLs.split(','),
+      address,
+      streetNumber: undefined,
+      street: undefined,
+      city: undefined,
+      state: undefined,
+      country: undefined,
+    };
     addMarket(newData)(dispatch);
   }
 
   return (
-    <Grid centered columns={2}>
+    <Grid centered columns={2} style={{ marginBottom: '2em' }}>
       <Grid.Column>
-        <h1 style={{ marginTop: '1em' }}>Add New Address</h1>
+        <h1 style={{ marginTop: '1.5em' }}>Add New Address</h1>
         <Form onSubmit={handleSubmit(onSubmit)} loading={state.loading}>
           <Form.Field className={classnames({ error: errors.name })}>
             <label htmlFor="name">
@@ -113,27 +130,103 @@ const PostMarketNew = () => {
               />
             </label>
           </Form.Field>
-          <Form.Field className={classnames({ error: errors.address })}>
-            <label htmlFor="address">
-              Address
-              <input
-                id="address"
-                name="address"
-                type="text"
-                placeholder="15 Allen Avenue, Ikeja, Lagos"
-                ref={register({
-                  required: true,
-                  minLength: 2
-                })}
-              />
-            </label>
-            <span className="error">
-              {errors.address && errors.address.type === 'required' && 'You need to provide a Address'}
-            </span>
-            <span className="error">
-              {errors.address && errors.address.type === 'minLength' && 'address'}
-            </span>
+          <Form.Group widths="equal">
+            <Form.Field className={classnames({ error: errors.streetNumber })}>
+              <label htmlFor="streetNumber">
+                Number
+                <input
+                  id="streetNumber"
+                  name="streetNumber"
+                  type="number"
+                  placeholder="15"
+                  ref={register({
+                    required: true,
+                    minLength: 1
+                  })}
+                />
+              </label>
+              <span className="error">
+                {errors.streetNumber && errors.streetNumber.type === 'required' && 'You need to provide a Street Number'}
+              </span>
+              <span className="error">
+                {errors.streetNumber && errors.streetNumber.type === 'minLength' && 'streetNumber'}
+              </span>
             </Form.Field>
+            <Form.Field className={classnames({ error: errors.street })}>
+              <label htmlFor="street">
+                Street Name
+                <input
+                  id="street"
+                  name="street"
+                  type="text"
+                  placeholder="Allen Avenue"
+                  ref={register({
+                    required: true,
+                    minLength: 2
+                  })}
+                />
+              </label>
+              <span className="error">
+                {errors.street && errors.street.type === 'required' && 'You need to provide a Street Name'}
+              </span>
+              <span className="error">
+                {errors.street && errors.street.type === 'minLength' && 'street'}
+              </span>
+            </Form.Field>
+            <Form.Field className={classnames({ error: errors.city })}>
+              <label htmlFor="city">
+                City
+                <input
+                  id="city"
+                  name="city"
+                  type="text"
+                  placeholder="Allen Avenue"
+                  ref={register({
+                    required: true,
+                    minLength: 2
+                  })}
+                />
+              </label>
+              <span className="error">
+                {errors.city && errors.city.type === 'required' && 'You need to provide a City'}
+              </span>
+              <span className="error">
+                {errors.city && errors.city.type === 'minLength' && 'city'}
+              </span>
+            </Form.Field>
+          </Form.Group>
+          <Form.Group widths="equal">
+            <Form.Field className={classnames({ error: errors.state })}>
+              <label htmlFor="state">
+                State
+                <select className="ui compact selection dropdown" id="state" name="state" ref={register}>
+                  <option value="Lagos">Lagos</option>
+                  <option value="Ogun">Ogun</option>
+                  <option value="Abuja">Abuja</option>
+                </select>
+              </label>
+              <span className="error">
+                {errors.state && errors.state.type === 'required' && 'You need to provide a state Name'}
+              </span>
+              <span className="error">
+                {errors.state && errors.state.type === 'minLength' && 'state'}
+              </span>
+            </Form.Field>
+            <Form.Field className={classnames({ error: errors.country })}>
+              <label htmlFor="country">
+                Country
+                <select className="ui compact selection dropdown" id="country" name="country" ref={register}>
+                  <option value="Nigeria">Nigeria</option>
+                </select>
+              </label>
+              <span className="error">
+                {errors.country && errors.country.type === 'required' && 'You need to provide a Country Name'}
+              </span>
+              <span className="error">
+                {errors.country && errors.country.type === 'minLength' && 'country'}
+              </span>
+            </Form.Field>
+          </Form.Group>
               {
           // <Form.Group widths="equal">
           //   <Form.Field className={classnames({ error: errors.lng })}>

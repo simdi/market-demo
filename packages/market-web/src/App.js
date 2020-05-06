@@ -7,9 +7,12 @@ import './App.css';
 // import MarketContainer from './container/MarketContainer';
 import MarketPage from './pages/Market.page';
 import MenubarPage from './pages/Menubar.page';
+
 import LoginComponent from './components/Login.component';
 // import PostMarketComponent from './components/PostMarket.component';
 import PostMarketNew from './components/PostMarketNew';
+// import { setCurrentUser, logoutUser } from './redux/actions/authAction';
+
 
 function App() {
   return (

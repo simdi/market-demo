@@ -6,7 +6,6 @@ import jwtDecode from 'jwt-decode';
 // Login User
 export const loginUser = (userData) => dispatch => {
   axios.post('/api/v1/auth/login', userData).then(res => {
-    console.log('REs', res);
     // Save to local storage
     const { access_token } = res.data;
     localStorage.setItem('jwtToken', access_token);
@@ -16,8 +15,8 @@ export const loginUser = (userData) => dispatch => {
     const decoded = jwtDecode(access_token);
     // Set current user
     dispatch(setCurrentUser(decoded));
+    window.location.href = '/admin/markets';
   }).catch(err => {
-    console.log('Error', err.response);
     dispatch({
       type: GET_ERRORS,
       payload: { email: err.response.data.message }

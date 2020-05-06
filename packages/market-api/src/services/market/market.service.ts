@@ -16,11 +16,13 @@ export class MarketService {
         "imageURLs": ['https://placehold.it'],
         "category": "meat",
         "address": {
+            "street": "Leye Pratt St, Olowora",
             "fullAddress": "13 Leye Pratt St, Olowora, Lagos, Nigeria",
             "location": {
                 "lat": 6.6387417,
                 "lng": 3.3768178
             },
+            "state": "Lagos",
             "streetNumber": "13",
             "city": "Olowora",
             "country": "Nigeria"
@@ -33,12 +35,14 @@ export class MarketService {
         "imageURLs": ['https://assd.com/image','https://asdas.com/aimaga'],
         "category": "Okrika Clothes",
         "address": {
+            "street": "Allen Ave, Allen",
             "fullAddress": "13 Allen Ave, Allen, Ikeja, Nigeria",
             "location": {
                 "lat": 6.5972297,
                 "lng": 3.3541596
             },
             "streetNumber": "13",
+            "state": "Lagos",
             "city": "Allen",
             "country": "Nigeria"
         },
@@ -47,46 +51,45 @@ export class MarketService {
     ];
   }
 
-  async create(market: any) {
+  async create(market: Market) {
     market.id = uuid();
     try {
       // const googleAPI = await  this.httpService.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${market.address}&key=${this.googleMapsApiKey}`).toPromise();
       const googleAPI = await this.httpService.get('https://api.github.com/users/simdi').toPromise();
-      const data = await this.extractAddressFromGoogleResponse(googleAPI.data);
+      const data: Market = await this.extractAddressFromGoogleResponse(googleAPI.data, market);
       console.log('Google', data);
-      if (data) {
-        market.address = data;
-      }
-      this.markets.push(market);
+      this.markets.push(data);
     } catch(e) {
       console.log('Error', e);
     }
   }
 
-  async extractAddressFromGoogleResponse(data: any) {
-    console.log('Google response', data);
+  async extractAddressFromGoogleResponse(data: any, market: Market) {
     if(data.results && data.results.length > 0 && data.status && data.status === 'OK') {
-      const address: any = {
-        fullAddress: data.results[0].formatted_address,
-        location: data.results[0].geometry.location
+      const newMarket: any = {
+        ...market,
+        address: {
+          ...market.address,
+          location: data.results[0].geometry.location
+        }
       };
 
-      const parts = data.results[0].address_components;
-      parts.forEach(part => {
-        if (part.types.includes("country")) {
-          address.country = part.long_name;
-        }
-        if (part.types.includes("neighborhood")) {
-          address.city = part.long_name;
-        }
-        if (part.types.includes("street_number")) {
-          address.streetNumber = part.long_name;
-        }
-      });
+      // const parts = data.results[0].address_components;
+      // parts.forEach(part => {
+      //   if (part.types.includes("country")) {
+      //     address.country = part.long_name;
+      //   }
+      //   if (part.types.includes("neighborhood")) {
+      //     address.city = part.long_name;
+      //   }
+      //   if (part.types.includes("street_number")) {
+      //     address.streetNumber = part.long_name;
+      //   }
+      // });
 
-      return address;
+      return newMarket;
     }
-    return undefined;
+    return market;
   }
 
   async searchByNameCategoryAndLocation(search: string, lng: number, lat: number) {

@@ -11,11 +11,10 @@ const MarketPage = props => {
   const context = useContext(GlobalContext);
   const {state, dispatch, getMarkets} = context;
   const { market: { markets } } = state;
-  console.log('Context', context);
 
   useEffect(() => {
     getMarkets()(dispatch);
-  }, [dispatch]);
+  }, [getMarkets,dispatch]);
 
   return (
     <React.Fragment>
@@ -30,7 +29,7 @@ const MarketPage = props => {
         <Grid.Column width={8}>
           <Markets />
         </Grid.Column>
-        <Grid.Column width={8}>
+        <Grid.Column width={8} style={{ height: '800px' }}>
           <Map markets={markets} />
         </Grid.Column>
       </Grid>

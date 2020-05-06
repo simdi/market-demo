@@ -17,7 +17,6 @@ export const GlobalContext = createContext(initialState);
 export const GlobalContextProvider = props => {
   const context = useReducer(rootReducer, initialState);
   const [state, dispatch] = context;
-  console.log('State', state);
   const { children } = props;
 
   return (
