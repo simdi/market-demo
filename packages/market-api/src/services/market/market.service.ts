@@ -1,11 +1,11 @@
-import { Injectable, HttpService } from '@nestjs/common';
+import { Injectable, HttpService, NotFoundException } from '@nestjs/common';
 import { Market } from 'src/models/market.model';
 import { v4 as uuid } from 'uuid';
 import { jwtConstants } from 'src/utils/constants';
 
 @Injectable()
 export class MarketService {
-  private readonly markets: Market[] = [];
+  private markets: Market[] = [];
   private readonly googleMapsApiKey = jwtConstants.googleAPIKey;
 
   constructor(private httpService: HttpService) {
@@ -158,10 +158,28 @@ export class MarketService {
   }
 
   async findById(id: string): Promise<Market> {
-    const market =  this.markets.find(u => u.id === id);
+    const market = this.markets.find(u => u.id === id);
     if (!market) {
-      return null;
+      throw new NotFoundException();
     }
     return market;
+  }
+  
+  async deleteById(id: string): Promise<any> {
+    const market = this.markets.map((u, i) => {
+      if (u.id === id) {
+        this.markets.splice(i, 1);
+        return u;
+      }
+    });
+
+    if (!market) {
+      throw new NotFoundException();
+    }
+    return market;
+  }
+  
+  async updateById(id: string, data: Market): Promise<Market | any> {
+    this.markets = this.markets.map(obj => obj.id === id ? { ...obj, ...data, address: { ...obj.address, ...data.address } } : obj);
   }
 }
