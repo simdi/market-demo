@@ -20,7 +20,7 @@ export const loginUser = (userData) => dispatch => {
   }).catch(err => {
     dispatch({
       type: GET_ERRORS,
-      payload: { email: err.response.data.errors }
+      payload: { email: err.response.data.error }
     });
   });
 }

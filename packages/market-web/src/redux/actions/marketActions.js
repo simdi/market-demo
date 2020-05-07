@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD_MARKET, FETCH_MARKETS, SEARCH_MARKETS, GET_ERRORS, CLEAR_ERRORS, POST_LOADING, GET_LOADING } from './types';
+import { ADD_MARKET, FETCH_MARKETS, SEARCH_MARKETS, GET_ERRORS, CLEAR_ERRORS, POST_LOADING, GET_LOADING, POST_SENT } from './types';
 
 // Add Post
 export const addMarket = postData => dispatch => {
@@ -11,6 +11,10 @@ export const addMarket = postData => dispatch => {
       payload: (res.data.length > 0) ? res.data : []
     });
     dispatch(setPostLoading(false));
+    dispatch(setPostSuccess(true));
+    setTimeout(() => {
+      dispatch(setPostSuccess(false));
+    }, 3000);
   }).catch(err => {
     dispatch({
       type: GET_ERRORS,
@@ -65,6 +69,12 @@ export const searchMarketWithNameCategoryAndLocation = (data) => dispatch => {
 export const setPostLoading = (loading) => {
   return {
     type: POST_LOADING,
+    payload: loading
+  };
+};
+export const setPostSuccess = (loading) => {
+  return {
+    type: POST_SENT,
     payload: loading
   };
 };

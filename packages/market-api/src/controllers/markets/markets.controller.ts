@@ -14,7 +14,6 @@ export class MarketsController {
 
   @Get('filterBy')
   searchWithNameCategoryAndLocation(@Query() query): Promise<Market[]> {
-    console.log('query', query);
     const { search, lat, lng } = query;
     return this.marketService.searchByNameCategoryAndLocation(search, lng, lat);
   }

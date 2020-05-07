@@ -28,6 +28,7 @@ const Routes = () => {
             <Route exact path='/' component={MarketPage} />
             <Route exact path="/auth/login" component={LoginComponent} />
             <PrivateRoute path='/admin/markets' isAuthenticated={auth.isAuthenticated} component={PostMarketNew} />
+            <Redirect to={{pathname:'/'}} />
           </Switch>
         </div>
       </Router>

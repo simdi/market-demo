@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Form, Grid, Button } from 'semantic-ui-react';
+import { Form, Grid, Button, Message } from 'semantic-ui-react';
 import { useForm } from 'react-hook-form';
 import classnames from 'classnames';
 import { GlobalContext } from '../context';
@@ -7,12 +7,9 @@ import { GlobalContext } from '../context';
 const PostMarketNew = () => {
   const context = useContext(GlobalContext);
   const {state, dispatch, addMarket } = context;
-  console.log('Context', context);
-  console.log('State', state);
+  const { market: { postLoading, postSuccess }} = state;
   const { register, errors, handleSubmit } = useForm();
-  console.log('Error', errors);
   const onSubmit = data => {
-    console.log(data);
     const address = {
       streetNumber: data.streetNumber,
       street: data.street,
@@ -38,6 +35,13 @@ const PostMarketNew = () => {
     <Grid centered columns={2} style={{ marginBottom: '2em' }}>
       <Grid.Column>
         <h1 style={{ marginTop: '1.5em' }}>Add New Address</h1>
+        {
+          postSuccess ? (<Message
+            success
+            header='Your post was successful'
+            content='You have successfully added a market'
+          />) : null
+        }
         <Form onSubmit={handleSubmit(onSubmit)} loading={state.loading}>
           <Form.Field className={classnames({ error: errors.name })}>
             <label htmlFor="name">
@@ -217,47 +221,7 @@ const PostMarketNew = () => {
               </span>
             </Form.Field>
           </Form.Group>
-              {
-          // <Form.Group widths="equal">
-          //   <Form.Field className={classnames({ error: errors.lng })}>
-          //     <label htmlFor="lng">
-          //       Longitude
-          //       <input
-          //         id="lng"
-          //         name="lng"
-          //         type="number"
-          //         placeholder="3.434"
-          //         ref={register({ required: true, minLength: 2 })}
-          //       />
-          //     </label>
-          //     <span className="error">
-          //       {errors.lng && errors.lng.type === 'required' && 'You need to provide Longitude'}
-          //     </span>
-          //     <span className="error">
-          //       {errors.lng && errors.lng.type === 'minLength' && 'Must be 2 or more characters'}
-          //     </span>
-          //   </Form.Field>
-          //   <Form.Field className={classnames({ error: errors.lat })}>
-          //     <label htmlFor="lat">
-          //       Latitude
-          //       <input
-          //         id="lat"
-          //         name="lat"
-          //         type="number"
-          //         placeholder="73.345"
-          //         ref={register({ required: true, minLength: 2 })}
-          //       />
-          //     </label>
-          //     <span className="error">
-          //       {errors.lat && errors.lat.type === 'required' && 'You need to provide Latitude'}
-          //     </span>
-          //     <span className="error">
-          //       {errors.lat && errors.lat.type === 'minLength' && 'Must be 2 or more characters'}
-          //     </span>
-          //   </Form.Field>
-          // </Form.Group>
-        }
-          <Button primary type="submit">
+          <Button primary type="submit" loading={postLoading} disabled={postLoading}>
             Save
           </Button>
         </Form>

@@ -1,4 +1,5 @@
 export const ADD_MARKET = 'ADD_MARKET';
+export const POST_SENT = 'POST_SENT';
 export const FETCH_MARKETS = 'FETCH_MARKETS';
 export const SEARCH_MARKETS = 'SEARCH_MARKETS';
 export const GET_ERRORS = 'GET_ERRORS';

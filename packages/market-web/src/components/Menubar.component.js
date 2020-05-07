@@ -22,7 +22,7 @@ const MenubarComponent = () => {
     }
       <div className="right menu">
       {
-        isAuthenticated ? (<Button className="ui item" onClick={() => dispatch(logoutUser())}>
+        isAuthenticated ? (<Button className="ui item" onClick={() => logoutUser()(dispatch)}>
           <i className="sign-out icon"></i>
           Logout
         </Button>) :

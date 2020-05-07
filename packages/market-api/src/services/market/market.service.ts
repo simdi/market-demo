@@ -75,10 +75,9 @@ export class MarketService {
     try {
       const googleAPI = await  this.httpService.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${market.address}&key=${this.googleMapsApiKey}`).toPromise();
       const data: Market = await this.extractAddressFromGoogleResponse(googleAPI.data, market);
-      console.log('Google', data);
       this.markets.push(data);
     } catch(e) {
-      console.log('Error', e);
+      console.error('Error', e);
     }
   }
 
@@ -128,7 +127,7 @@ export class MarketService {
         });
       }
     } catch (e) {
-      console.log('Error', e);
+      console.error('Error', e);
     }
   }
 

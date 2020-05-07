@@ -9,6 +9,7 @@ const LoginComponent = () => {
   const {state, dispatch, loginUser } = context;
   const loginError = state.errors;
   const { register, errors, handleSubmit } = useForm();
+
   const onSubmit = data => {
     loginUser(data)(dispatch);
   }

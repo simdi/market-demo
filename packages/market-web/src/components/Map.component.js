@@ -53,7 +53,7 @@ export class MapContainer extends Component {
 
   render() {
     const { markets, google } = this.props;
-    const { location, activeMarker, showingInfoWindow, selectedPlace } = this.state;
+    const { location, activeMarker, showingInfoWindow } = this.state;
 
     this.getUserLocation();
 

@@ -5,7 +5,7 @@ import { GlobalContext } from '../context';
 function Search(props) {
   const context = useContext(GlobalContext);
   const {state, dispatch, searchMarketWithNameCategoryAndLocation } = context;
-  const { register, errors, handleSubmit, setValue, getValues } = useForm({
+  const { register, handleSubmit, setValue, getValues } = useForm({
     defaultValues: {
       search: "",
       nearest: false,
