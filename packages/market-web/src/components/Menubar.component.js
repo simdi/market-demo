@@ -1,41 +1,12 @@
 import React, { useContext } from 'react';
-// import jwtDecode from 'jwt-decode';
-// import helpers from '../helpers/helpers';
+import { Button } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
-// import { setCurrentUser, logoutUser } from '../redux/actions/authAction';
 import { GlobalContext } from '../context';
 
 const MenubarComponent = () => {
   const context = useContext(GlobalContext);
-  const { state } = context;
-  console.log('res', state);
-  const { isAuthenticated } = state;
-  // let history = useHistory();
-  // // let dispatch = useDispatch();
-  // // useEffect(() => {
-  // //   history.push('/admin/markets');
-  // // }, [history]);
-
-  // console.log('Called', localStorage.getItem('jwtToken'));
-  // if (localStorage.getItem('jwtToken')) {
-  //   // Set Auth token in headers
-  //   helpers.setAuthToken(localStorage.getItem('jwtToken'));
-  //   // Decode jwtToken and get user info and expiry
-  //   const decode = jwtDecode(localStorage.getItem('jwtToken'));
-  //   // Set user and isAuthenticated
-  //   dispatch(setCurrentUser(decode));
-  //   // Logout user if token expires
-  //   const currentTime = Date.now() / 1000;
-  //   if (decode.exp < currentTime) {
-  //     // Logout user
-  //     dispatch(logoutUser());
-  //     // Clear current profile
-  //     // dispatch(clearCurrentProfile);
-  //     // Redirect to login page
-  //     history.push('/login');
-  //     // window.location.href = '/login';
-  //   }
-  // }
+  const { state, dispatch, logoutUser } = context;
+  const { auth : {isAuthenticated }} = state;
 
   return (
     <div className="ui fluid menu">
@@ -51,10 +22,12 @@ const MenubarComponent = () => {
     }
       <div className="right menu">
       {
-        isAuthenticated ? (<NavLink className="ui item" to="">
+        isAuthenticated ? (<Button className="ui item" onClick={() => dispatch(logoutUser())}>
+          <i className="sign-out icon"></i>
           Logout
-        </NavLink>) :
-        (<NavLink className="ui item" to="/auth/login">
+        </Button>) :
+        (<NavLink className="ui item" to="/auth/login" >
+          <i className="sign-in icon"></i>
           Login
         </NavLink>)
       }

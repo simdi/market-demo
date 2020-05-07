@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { GET_ERRORS, SET_CURRENT_USER } from './types';
+import history from '../../helpers/history';
 import helpers from '../../helpers/helpers';
 import jwtDecode from 'jwt-decode';
 
@@ -15,11 +16,11 @@ export const loginUser = (userData) => dispatch => {
     const decoded = jwtDecode(access_token);
     // Set current user
     dispatch(setCurrentUser(decoded));
-    window.location.href = '/admin/markets';
+    history.push('/admin/markets');
   }).catch(err => {
     dispatch({
       type: GET_ERRORS,
-      payload: { email: err.response.data.message }
+      payload: { email: err.response.data.errors }
     });
   });
 }

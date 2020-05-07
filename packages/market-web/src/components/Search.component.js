@@ -6,12 +6,12 @@ import { GlobalContext } from '../context';
 function Search(props) {
   const context = useContext(GlobalContext);
   const {state, dispatch, searchMarketWithNameCategoryAndLocation } = context;
-  console.log('Context', context);
-  console.log('State', state);
+  // console.log('Context', context);
+  // console.log('State', state);
   const { register, errors, handleSubmit, setValue } = useForm();
   console.log('Error', errors);
   const onSubmit = data => {
-    console.log(data);
+    // console.log(data);
     searchMarketWithNameCategoryAndLocation(data)(dispatch);
   }
 

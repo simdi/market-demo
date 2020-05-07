@@ -5,6 +5,7 @@ import { loginUser, logoutUser } from '../redux/actions/authAction';
 import { marketState } from '../redux/reducers/marketReducer';
 import { errorState } from '../redux/reducers/errorReducer';
 import { authState } from '../redux/reducers/authReducer';
+import { setCurrentUser } from '../redux/actions/authAction';
 
 const initialState = {
   market: { ...marketState },
@@ -27,7 +28,8 @@ export const GlobalContextProvider = props => {
       addMarket,
       searchMarketWithNameCategoryAndLocation,
       loginUser,
-      logoutUser
+      logoutUser,
+      setCurrentUser,
     }}>
       {children}
     </GlobalContext.Provider>
