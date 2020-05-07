@@ -14,39 +14,58 @@ export class MarketService {
         "name": "Sunday Market",
         "description": "Sunday market sells groceries",
         "imageURLs": ['https://picsum.photos/200/300', 'https://picsum.photos/200/300'],
-        "category": "meat",
+        "category": "Meat",
         "address": {
-            "street": "Leye Pratt St, Olowora",
-            "fullAddress": "13 Leye Pratt St, Olowora, Lagos, Nigeria",
+            "street": "Ozumba Mbadiwe Ave",
+            "fullAddress": "Plot GA 1, Ozumba Mbadiwe Ave, Victoria Island, Lagos",
             "location": {
-                "lat": 6.6387417,
-                "lng": 3.3768178
+                "lat": 6.437949499999999,
+                "lng": 3.4230012
             },
             "state": "Lagos",
             "streetNumber": "13",
-            "city": "Olowora",
+            "city": "Victoria Island",
             "country": "Nigeria"
         },
         "id": "10f15fca-86e0-4cb9-92d4-9c6e984528a2"
       },
       {
-        "name": "Oynibo Market",
-        "description": "Oynibo market sells cloths",
+        "name": "Eko Market",
+        "description": "Eko sells all kinds of stuff",
         "imageURLs": ['https://picsum.photos/200/300','https://picsum.photos/200/300'],
-        "category": "Okrika Clothes",
+        "category": "Clothes",
         "address": {
-            "street": "Allen Ave, Allen",
-            "fullAddress": "13 Allen Ave, Allen, Ikeja, Nigeria",
+            "street": "Adetokunbo Ademola",
+            "fullAddress": "Plot 1415 Adetokunbo Ademola Street, PMB 12724, Victoria Island, Lagos Nigeria",
             "location": {
-                "lat": 6.5972297,
-                "lng": 3.3541596
+                "lat": 6.426759800000001,
+                "lng": 3.4301443
             },
-            "streetNumber": "13",
+            "streetNumber": "1415",
             "state": "Lagos",
-            "city": "Allen",
+            "city": "Victoria Island",
             "country": "Nigeria"
         },
         "id": "a55c069a-00e5-42e1-9ad5-0bf0b5018e0b"
+      },
+      {
+        "name": "Lasode Market",
+        "description": "Lasode market sells all kind of meat",
+        "imageURLs": ['https://picsum.photos/200/300','https://picsum.photos/200/300'],
+        "category": "Meat market",
+        "address": {
+            "street": "Lasode Cresent",
+            "fullAddress": "8, Lasode Cresent Victoria Island, Lagos,Nigeria",
+            "location": {
+              "lat": 6.4353943,
+              "lng": 3.4410672
+            },
+            "streetNumber": "8",
+            "state": "Lagos",
+            "city": "Victoria Island",
+            "country": "Nigeria"
+        },
+        "id": "a55c069a-00e5-42e1-9ad5-0bf0b5014304"
       }
     ];
   }
