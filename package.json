@@ -1,7 +1,30 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "bootstrap:ci": "lerna bootstrap --concurrency=1",
+    "clean": "lerna clean",
+    "test": "lerna run test",
+    "test:e2e": "lerna run test:e2e",
+    "test:ci": "lerna run test:ci",
+    "lint:ci": "lerna run lint:ci",
+    "lint": "lerna run lint",
+    "lint:fix": "lerna run lint -- --fix"
+  },
   "devDependencies": {
     "lerna": "^3.20.2"
-  }
+  },
+  "engines": {
+    "node": ">=8.11.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:simdi/market-demo.git#master"
+  },
+  "author": {
+    "name": "Chisimdi Ezeanieto",
+    "email": "simdi4iverson@yahoo.co.uk"
+  },
+  "license": "SEE LICENSE IN <LICENSE>"
 }

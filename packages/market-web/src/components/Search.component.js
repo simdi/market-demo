@@ -8,11 +8,16 @@ function Search(props) {
   const {state, dispatch, searchMarketWithNameCategoryAndLocation } = context;
   console.log('Context', context);
   console.log('State', state);
-  const { register, errors, handleSubmit } = useForm();
+  const { register, errors, handleSubmit, setValue } = useForm();
   console.log('Error', errors);
   const onSubmit = data => {
     console.log(data);
     searchMarketWithNameCategoryAndLocation(data)(dispatch);
+  }
+
+  const handleRadioChange = (e) => {
+    console.log('Value changes', e.target.value);
+    setValue("nearest", true);
   }
 
   return (
@@ -29,7 +34,7 @@ function Search(props) {
             </div>
           </div>
           <div className="sixteen wide column">
-            <Radio name="nearest" toggle label="Use nearest location to search?" />
+            <Radio name="nearest" onChange={handleRadioChange} toggle label="Use nearest location to search?" />
           </div>
         </div>
       </form>
