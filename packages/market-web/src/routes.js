@@ -5,7 +5,7 @@ import { GlobalContext } from './context';
 import MarketPage from './pages/Market.page';
 import MenubarPage from './pages/Menubar.page';
 import LoginComponent from './components/Login.component';
-import PostMarketNew from './components/PostMarketNew';
+import PostMarketNew from './components/PostMarket';
 
 const PrivateRoute = ({component: Component, isAuthenticated }) => (
   <Route render={props => isAuthenticated === true

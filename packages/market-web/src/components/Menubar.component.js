@@ -10,6 +10,7 @@ const MenubarComponent = () => {
 
   return (
     <div className="ui fluid menu">
+      <h3 style={{ padding: '10px 20px', marginTop: '10px', marginBottom: '5px' }}>Market Search</h3>
       <NavLink className="item" activeClassName="active" exact to="/">
           Home
       </NavLink>

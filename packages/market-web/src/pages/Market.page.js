@@ -1,7 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import { Grid } from 'semantic-ui-react';
-// import { Container, Row, Col } from 'react-bootstrap';
-// import PropTypes from 'prop-types';
 import Markets from '../components/Markets.component';
 import Map from '../components/Map.component';
 import Search from '../components/Search.component';
@@ -19,20 +17,16 @@ const MarketPage = props => {
   return (
     <React.Fragment>
       <Grid columns={2} padded>
-        <Grid.Column width={8}>
+        <Grid.Column mobile={16} tablet={8} computer={6}>
           <Search />
           <Markets />
         </Grid.Column>
-        <Grid.Column width={8} style={{ height: '800px' }}>
+        <Grid.Column mobile={16} tablet={8} computer={10} style={{ height: '800px' }}>
           <Map markets={markets} />
         </Grid.Column>
       </Grid>
     </React.Fragment>
   )
-}
-
-Markets.propTypes = {
-
 }
 
 export default MarketPage;

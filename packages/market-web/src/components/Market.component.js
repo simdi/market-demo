@@ -3,7 +3,7 @@ import { Card, Icon } from 'semantic-ui-react';
 
 const Market = ({ market }) => {
   return (
-    <div className="column">
+    <div className="column" style={{ marginTop: '1em '}}>
       <Card>
         <div className="ui slide masked reveal image">
           <img src={market.imageURLs[0]} style={{ height: '200px' }} alt={market.name} />

@@ -73,7 +73,8 @@ export class MarketService {
   async create(market: Market) {
     market.id = uuid();
     try {
-      const googleAPI = await  this.httpService.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${market.address}&key=${this.googleMapsApiKey}`).toPromise();
+      const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${market.address}&key=${this.googleMapsApiKey}`;
+      const googleAPI = await  this.httpService.get(url).toPromise();
       const data: Market = await this.extractAddressFromGoogleResponse(googleAPI.data, market);
       this.markets.push(data);
     } catch(e) {
@@ -98,10 +99,10 @@ export class MarketService {
 
   async searchByNameCategoryAndLocation(search: string, lng: number, lat: number) {
     try {
-      // Get users location from google api
-      const googleAPI = await  this.httpService.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${this.googleMapsApiKey}`).toPromise();
-  
       if (lng || lat) {
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${this.googleMapsApiKey}`;
+        // Get users location from google api
+        const googleAPI = await this.httpService.get(url).toPromise();
         // Get city, state, and country
         const googleRes = await this.extractLocationFromGoogleResponse(googleAPI.data);
         if (googleRes) {
