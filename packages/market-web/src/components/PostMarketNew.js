@@ -19,7 +19,7 @@ const PostMarketNew = () => {
       city: data.city,
       state: data.state,
       country: data.country,
-      fullName: `${data.streetNumber} ${data.street}, ${data.city}, ${data.state}, ${data.country}`,
+      fullAddress: `${data.streetNumber} ${data.street}, ${data.city}, ${data.state}, ${data.country}`,
     };
     const newData = { 
       ...data,
@@ -119,16 +119,6 @@ const PostMarketNew = () => {
             <span className="error">
               {errors.category && errors.category.type === 'minLength' && 'category'}
             </span>
-          </Form.Field>
-          <Form.Field className="ui toggle checkbox">
-            <label htmlFor="isAddress">
-              Is Address?
-              <input
-                id="isAddress"
-                name="isAddress"
-                type="checkbox"
-              />
-            </label>
           </Form.Field>
           <Form.Group widths="equal">
             <Form.Field className={classnames({ error: errors.streetNumber })}>

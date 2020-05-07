@@ -73,8 +73,7 @@ export class MarketService {
   async create(market: Market) {
     market.id = uuid();
     try {
-      // const googleAPI = await  this.httpService.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${market.address}&key=${this.googleMapsApiKey}`).toPromise();
-      const googleAPI = await this.httpService.get('https://api.github.com/users/simdi').toPromise();
+      const googleAPI = await  this.httpService.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${market.address}&key=${this.googleMapsApiKey}`).toPromise();
       const data: Market = await this.extractAddressFromGoogleResponse(googleAPI.data, market);
       console.log('Google', data);
       this.markets.push(data);
@@ -93,33 +92,65 @@ export class MarketService {
         }
       };
 
-      // const parts = data.results[0].address_components;
-      // parts.forEach(part => {
-      //   if (part.types.includes("country")) {
-      //     address.country = part.long_name;
-      //   }
-      //   if (part.types.includes("neighborhood")) {
-      //     address.city = part.long_name;
-      //   }
-      //   if (part.types.includes("street_number")) {
-      //     address.streetNumber = part.long_name;
-      //   }
-      // });
-
       return newMarket;
     }
     return market;
   }
 
   async searchByNameCategoryAndLocation(search: string, lng: number, lat: number) {
-    console.log('Service', search, lng, lat);
-    return this.markets.filter(market => {
-      const nameSearch = market.name.toLowerCase().includes(search);
-      const categorySearch = market.category.toLowerCase().includes(search);
-      if (nameSearch || categorySearch) {
-        return market;
+    try {
+      // Get users location from google api
+      const googleAPI = await  this.httpService.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${this.googleMapsApiKey}`).toPromise();
+  
+      if (lng || lat) {
+        // Get city, state, and country
+        const googleRes = await this.extractLocationFromGoogleResponse(googleAPI.data);
+        if (googleRes) {
+          const { city, state, country } = googleRes;
+          return this.markets.filter(market => {
+            const nameSearch = market.name.toLowerCase().includes(search.toLowerCase());
+            const categorySearch = market.category.toLowerCase().includes(search.toLowerCase());
+            const citySearch = market.address.city.toLowerCase().includes(city.toLowerCase());
+            const stateSearch = market.address.state.toLowerCase().includes(state.toLowerCase());
+            const countrySearch = market.address.country.toLowerCase().includes(country.toLowerCase());
+            if ((nameSearch || categorySearch) && (citySearch && stateSearch && countrySearch)) {
+              return market;
+            }
+          });
+        }
+      } else {
+        return this.markets.filter(market => {
+          const nameSearch = market.name.toLowerCase().includes(search);
+          const categorySearch = market.category.toLowerCase().includes(search);
+          if (nameSearch || categorySearch) {
+            return market;
+          }
+        });
       }
-    });
+    } catch (e) {
+      console.log('Error', e);
+    }
+  }
+
+  async extractLocationFromGoogleResponse(data: any) {
+    if(data.results && data.results.length > 0 && data.status && data.status === 'OK') {
+      const address: any = {};
+      const parts = data.results[0].address_components;
+      parts.forEach(part => {
+        if (part.types.includes("country")) {
+          address.country = part.long_name;
+        }
+        if (part.types.includes("neighborhood") || part.types.includes('administrative_area_level_2') || part.types.includes('locality')) {
+          address.city = part.long_name;
+        }
+        if (part.types.includes("administrative_area_level_1")) {
+          address.state = part.long_name;
+        }
+      });
+
+      return address;
+    }
+    return null;
   }
 
   async findAll(): Promise<Market[]> {

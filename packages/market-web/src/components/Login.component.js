@@ -16,7 +16,7 @@ const LoginComponent = () => {
   return (
     <Grid centered columns={2} style={{ marginTop: '3em'}}>
       <Grid.Column className="ui fluid card">
-        <h1 style={{ marginTop: '1em' }}>Add New Address</h1>
+        <h1 style={{ marginTop: '1em' }}> <i className="sign-in icon"></i> Login</h1>
         {
           loginError.email ? (<div className="ui icon warning message" >
             <i className="lock icon"></i>
@@ -74,7 +74,7 @@ const LoginComponent = () => {
             </span>
           </Form.Field>
           <Button primary type="submit">
-            <i className="unlock alternate icon"></i>
+            <i className="sign-in icon"></i>
             Login
           </Button>
         </Form>

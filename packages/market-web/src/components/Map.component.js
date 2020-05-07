@@ -37,16 +37,15 @@ export class MapContainer extends Component {
   getUserLocation = props => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-          this.setState(prevState => ({
-            location: {
-              ...prevState.currentLatLng,
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            },
-            isMarkerShown: true
-          }));
-        }
-      )
+        this.setState(prevState => ({
+          location: {
+            ...prevState.currentLatLng,
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          },
+          isMarkerShown: true
+        }));
+      });
     } else {
       alert("You need to accept google maps location");
     }

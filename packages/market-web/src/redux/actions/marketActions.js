@@ -38,9 +38,15 @@ export const getMarkets = () => dispatch => {
   });
 };
 
-export const searchMarketWithNameCategoryAndLocation = ({ search }) => dispatch => {
+export const searchMarketWithNameCategoryAndLocation = (data) => dispatch => {
+  const { search, nearest, lng, lat } = data;
+
+  let url = `/api/v1/markets/filterBy?search=${search}`;
+  if(nearest) {
+    url = `/api/v1/markets/filterBy?search=${search}&lat=${lat}&lng=${lng}`;
+  }
   dispatch(setGetLoading(true));
-  axios.get(`/api/v1/markets/filterBy?search=${search}`).then(res => {
+  axios.get(url).then(res => {
     dispatch({
         type: SEARCH_MARKETS,
         payload: (res.data.length > 0) ? res.data : []

@@ -1,24 +1,35 @@
 import React, { useContext } from 'react';
-import { Radio } from 'semantic-ui-react';
 import { useForm } from 'react-hook-form';
 import { GlobalContext } from '../context';
 
 function Search(props) {
   const context = useContext(GlobalContext);
   const {state, dispatch, searchMarketWithNameCategoryAndLocation } = context;
-  // console.log('Context', context);
-  // console.log('State', state);
-  const { register, errors, handleSubmit, setValue } = useForm();
-  console.log('Error', errors);
+  const { register, errors, handleSubmit, setValue, getValues } = useForm({
+    defaultValues: {
+      search: "",
+      nearest: false,
+      lng: 3.3792,
+      lat: 6.5244,
+    }
+  });
+
   const onSubmit = data => {
-    // console.log(data);
     searchMarketWithNameCategoryAndLocation(data)(dispatch);
   }
 
-  const handleRadioChange = (e) => {
-    console.log('Value changes', e.target.value);
-    setValue("nearest", true);
+  const getUserLocation = (state) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        setValue('lat', position.coords.latitude);
+        setValue('lng', position.coords.longitude);
+      });
+    } else {
+      alert("You need to accept google maps location");
+    }
   }
+
+  getUserLocation(getValues());
 
   return (
     <div className="ui fluid card">
@@ -34,7 +45,12 @@ function Search(props) {
             </div>
           </div>
           <div className="sixteen wide column">
-            <Radio name="nearest" onChange={handleRadioChange} toggle label="Use nearest location to search?" />
+            <div className="ui toggle checkbox">
+              <input type="text" ref={register} name="lng" hidden />
+              <input type="text" ref={register} name="lat" hidden />
+              <input type="checkbox" ref={register} name="nearest" />
+              <label>Use to search markets nearest to your location?</label>
+            </div>
           </div>
         </div>
       </form>
